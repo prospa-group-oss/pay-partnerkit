@@ -62,7 +62,7 @@
         
         document.body.insertAdjacentHTML('beforebegin','<div id="prospa-pay-modal" class="prospa-pay-overlay"><a class="prospa-pay-cancel" href="#"></a><div class="prospa-pay-modal"><div class="prospa-pay-content"><img src="https://partner-kit.prospa.com/prospapay-moreinfo.png" width="100%"></div></div></div>');
         
-        document.getElementById("prospa-pay").innerHTML = 'or pay <span class="prospa-pay-tooltip-toggle" aria-label="' + 'Includes an establishment fee $' + establishmentFee + ' and a service fee $' + serviceFee  +'." tabindex="0" style="border-bottom: 1px dashed #333">$' + prospaPayWeeklyPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> per week over ' + prospaPayTerm + ' weeks, no interest with Prospa Pay. <a href="#prospa-pay-modal" style="color:#333">How does it work?</a>';
+        document.getElementById("prospa-pay").innerHTML = 'Or pay <span class="prospa-pay-tooltip-toggle" aria-label="' + 'Includes an establishment fee $' + establishmentFee + ' and a service fee $' + serviceFee  +'." tabindex="0" style="border-bottom: 1px dashed #333">$' + prospaPayWeeklyPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</span> per week over ' + prospaPayTerm + ' weeks, no interest with Prospa Pay. <a href="#prospa-pay-modal" style="color:#333">How does it work?</a>';
         
         var prospaPayStyle = document.createElement("style");
         prospaPayStyle.src = "https://cdn.optimizely.com/js/10934491209.css";
