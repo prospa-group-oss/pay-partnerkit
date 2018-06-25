@@ -10,7 +10,13 @@
     function __construct() {
 
     $( document ).ready( function() {
-        itemPrice = document.getElementById(document.getElementById('prospa-pay').getAttribute("priceid")).innerHTML;
+      
+        itemPrice = document.getElementById('prospa-pay').getAttribute("price") || null;
+        
+        if (itemPrice == null){
+            itemPrice = document.getElementById(document.getElementById('prospa-pay').getAttribute("priceid")).innerHTML;    
+        }        
+        console.log (itemPrice);
         calculatePrice();
     });
 
@@ -22,6 +28,7 @@
      
         itemPrice = parseInt(itemPrice.replace(/[^0-9\.-]+/g,""));    
 
+        
         if (itemPrice < 500 || itemPrice > 20000){
             return;
         } else if (itemPrice > 2000 && itemPrice <= 20000) {
