@@ -29,10 +29,9 @@
 
 .prospa-pay-modal {
     margin: 100px auto;
-    padding: 2px;
     background: #fff;
     width: 100%;
-    max-width: 709px;
+    max-width: 710px;
     border-radius: 2px;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
     position: relative;
@@ -43,4 +42,5 @@
     height: 100%;
     overflow: auto;
 }
+
 

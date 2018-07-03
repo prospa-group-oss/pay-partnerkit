@@ -1,8 +1,12 @@
 (function() {  
     
+    
+    // Set all variables via JSON and assign defaults
+    
+    
     var prospaPayTerm = document.getElementById('prospa-pay').getAttribute("term") || 13;
-    var serviceFee = prospaPayTerm * 2.95; // weekly service fee
-    var establishmentFee = 19.95; //default for an item between $500 and $2,000
+    var serviceFee = prospaPayTerm * 2.95;
+    var establishmentFee = 19.95; 
     var itemPrice = undefined;
     var prospaPayWeeklyPrice = undefined;
     var minPrice = Number(document.getElementById('prospa-pay').getAttribute("minprice")) || 1000;
@@ -14,7 +18,6 @@
     analytics.load("UXoGCevr6fdRT3RDpt4OUAHOzNMZjoY8");
     analytics.page();
     }}();
-
     
     var script = document.createElement("script");
     script.src = "https://cdn.optimizely.com/js/10931930792.js";
@@ -23,20 +26,44 @@
  
 
     function __construct() {
+
+        bindSegmentEvent();
+        getPrice();
+        showPrice();
+
         document.addEventListener("DOMContentLoaded", function(event) {
-            
-         
-            var cta = document.querySelectorAll( 'button[type="button"],button[type="submit"]');
+            bindSegmentEvent();
+            broadcast('Product Viewed');              
+        });
+        
+        
+        //Bind an event listener for cart update woocommerce only
+        
+        
+        
+        
+
+    }
+
+    
+    
+    function bindSegmentEvent (){
+
+      var cta = document.querySelectorAll( 'button[type="button"],button[type="submit"]');
             for (var i = 0; i < cta.length; i++) {
-              if ( cta[i].innerText.search( /add to cart/i ) !== -1 ) {                    
+                if ( cta[i].innerText.search( /add to cart/i ) !== -1 ) {                    
                     cta[i].addEventListener("click", function () {broadcast('Added To Cart')});
                     break;
                 }
             }
-            
-            
-            var platform = document.getElementById('prospa-pay').getAttribute("platform");    
-        
+    }
+
+    
+    
+    function getPrice(){
+
+        var platform = document.getElementById('prospa-pay').getAttribute("platform");    
+
             switch (platform){                
                 case 'shopify':
                     itemPrice = document.getElementById('prospa-pay').getAttribute("price") / 100;
@@ -48,17 +75,11 @@
                     itemPrice = document.getElementById('prospa-pay').getAttribute("price"); 
                     break;
             }
-            
-            calculatePrice();
-            broadcast('Product Viewed');
-                   
-        });
-    
-    }
 
+    }
  
-    
-  function calculatePrice () {
+  
+    function showPrice () {
       
             if (itemPrice >= minPrice && itemPrice <= 20000){
                 
@@ -67,11 +88,11 @@
                 }
 
                 prospaPayWeeklyPrice = ((Number(itemPrice) + establishmentFee + serviceFee)/prospaPayTerm).toFixed(2);
-                prospaPayOffer = 'or $' + prospaPayWeeklyPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' a week. <span><a href="#prospa-pay-modal" id="prospa-pay-modal-link" style="text-decoration:none; color:#0AC775">ProspaPay for business.</a></span>';
+                prospaPayOffer = 'or $' + prospaPayWeeklyPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' a&nbsp;week. <span><a href="#prospa-pay-modal" id="prospa-pay-modal-link" style="text-decoration:none; color:#0AC775">ProspaPay&nbsp;for&nbsp;business.</a></span>';
                
             } else if (isNaN(itemPrice)|| itemPrice == undefined || itemPrice == null || itemPrice == '' ) {                                
-                prospaPayOffer = 'Pay in 13 weekly instalments. <span><a href="#prospa-pay-modal" id="prospa-pay-modal-link" style="text-decoration:none; color:#0AC775">ProspaPay for business.</a></span>';                
-            } else if (itemPrice < 500 || itemPrice > 20000 ){
+                prospaPayOffer = 'Pay in 13 weekly instalments. <span><a href="#prospa-pay-modal" id="prospa-pay-modal-link" style="text-decoration:none; color:#0AC775">ProspaPay&nbsp;for&nbsp;business.</a></span>';                
+            } else if (itemPrice < minPrice || itemPrice > 20000 ){
                 return;
             }
             
@@ -79,35 +100,31 @@
             document.getElementById("prospa-pay").innerHTML = prospaPayOffer;
             offerDisplayed = true;
             
-            document.body.insertAdjacentHTML('beforeend','<div id="prospa-pay-modal" class="prospa-pay-overlay"><a id="prospa-pay-offer" class="prospa-pay-cancel" href="#"></a><div class="prospa-pay-modal"><div class="prospa-pay-content"><img src="https://partner-kit.prospa.com/assets/prospa-pay-how-it-works.png" width="100%"></div></div></div>');
+            document.body.insertAdjacentHTML('beforeend','<div id="prospa-pay-modal" class="prospa-pay-overlay"><a id="prospa-pay-offer" class="prospa-pay-cancel" href="#" onclick="location.href=\'#\'"></a><div class="prospa-pay-modal"><div class="prospa-pay-content"><img src="https://partner-kit.prospa.com/assets/prospa-pay-how-it-works.png" width="100%"></div></div></div>');
       
             document.getElementById("prospa-pay-modal-link").addEventListener("click", function () {broadcast('ProspaPay Offer Viewed')});
                                                                    
-        
-            
                     
             document.getElementById("prospa-pay").insertAdjacentHTML('beforebegin', '<style type="text/css">\
                                                                                        #prospa-pay{padding-top:10px;padding-bottom:10px}.prospa-pay-overlay{position:absolute;top:0;bottom:0;left:0;right:0;background:rgba(0,0,0,.8);transition:opacity .2s;visibility:hidden;opacity:0}.prospa-pay-overlay .prospa-pay-cancel{position:absolute;width:100%;height:100%;cursor:default}.prospa-pay-overlay:target{visibility:visible;opacity:1}#prospa-pay-modal.prospa-pay-overlay{z-index:1000000}.prospa-pay-modal{margin:100px auto;background:#fff;width:100%;max-width:710px;border-radius:2px;box-shadow:0 0 50px rgba(0,0,0,.5);position:relative}.prospa-pay-modal .prospa-pay-content{max-height:490px;overflow:auto}\
                                                                                     </style>');
-    
-      
-  }    
+    }    
     
     
    
-  function broadcast(message) {
-       analytics.track(message, {
-        installmentPrice: prospaPayWeeklyPrice,
-        numberInstallments: prospaPayTerm,
-        offerCopy: document.getElementById("prospa-pay").innerText,
-        offerDisplayed: offerDisplayed,
-        productName: document.getElementById('prospa-pay').getAttribute("productname"),
-        productPrice: itemPrice,
-        url: document.URL,
-        store: document.getElementById('prospa-pay').getAttribute("store"),
-        platform: document.getElementById('prospa-pay').getAttribute("platform")
+    function broadcast(message) {
+        analytics.track(message, {
+            instalmentPrice: prospaPayWeeklyPrice,
+            numberInstalments: prospaPayTerm,
+            offerCopy: document.getElementById("prospa-pay").innerText,
+            offerDisplayed: offerDisplayed,
+            productName: document.getElementById('prospa-pay').getAttribute("productname"),
+            productPrice: itemPrice,
+            url: document.URL,
+            store: document.getElementById('prospa-pay').getAttribute("store"),
+            platform: document.getElementById('prospa-pay').getAttribute("platform")
         });
-  }
+    }
         
         
        

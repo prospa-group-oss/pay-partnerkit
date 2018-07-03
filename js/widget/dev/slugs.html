@@ -1,0 +1,106 @@
+**
+Add in x per week, over 13 weeks.
+**
+
+
+
+
+
+**Code snippet**
+
+*HTML*
+<div id="prospa-pay" term="" minprice="" store="" platform="" price="" productname=""></div>
+
+*JS DEV*
+<script src="https://partner-kit.prospa.com/js/widget/dev/v9/prospa-pay-min-dev.js" id="prospa-pay"></script>
+
+
+*JS PROD*
+<script src="https://partner-kit.prospa.com/js/widget/v1/prospa-pay-min.js" id="prospa-pay"></script>
+
+
+
+
+
+**Supported platforms and variables**
+
+
+**WooCommerce**
+
+platform="woocommerce"
+price="<?php echo $product->price; ?>"
+productname="<?php echo $product->get_title(); ?>"
+
+<div id="prospa-pay" term="13" store="DSSE" minprice="500" platform="woocommerce" price="<?php echo $product->price; ?>" productname="<?php echo $product->get_title(); ?>"></div> 
+<script src="https://partner-kit.prospa.com/js/widget/dev/v8/prospa-pay-min-dev.js" id="prospa-pay"></script>
+
+/public_html/ripttest/wp-content/plugins/woocommerce/templates/single-product/price.php
+
+
+
+<div id="prospa-pay" term="13" store="Rippt" minprice="1000" platform="woocommerce" price="<?php echo $cart->grand_total; ?>" productname="" priceid=""></div> 
+<script src="https://partner-kit.prospa.com/js/widget/dev/v9/prospa-pay-min.js" id="prospa-pay"></script>
+
+
+
+
+
+
+
+
+
+**Shopify**
+
+platform="shopify"
+price="{{product.price}}"
+productname="{{product.title}}"
+
+<div id="prospa-pay" term="13" minprice="1000" store="Prospa Shopify Test" platform="shopify" price="{{product.price}}" productname="{{product.title}}"></div>
+<script src="https://partner-kit.prospa.com/js/widget/dev/v8/prospa-pay-min.js" id="prospa-pay"></script>
+
+
+
+
+**Neto**
+[@price@]
+[@model@],[@name@]
+
+<div id="prospa-pay" term="13" minprice="1000" store="Prospa Neto Test" platform="neto" price="[@price@]" productname="[@name@]" style="font-size:1.1em"></div>
+<script src="https://partner-kit.prospa.com/js/widget/dev/v8/prospa-pay-dev.js" id="prospa-pay"></script>
+
+File /storefront/templates/products/includes/header.template.html
+
+
+
+*Neto Cart*
+
+
+[@grand_total@]
+
+<div id="prospa-pay" term="13" minprice="1000" store="Prospa Neto Test" platform="neto" cart-price="[@grand_total@]" productname="[@name@]" style="font-size:1.1em"></div>
+<script src="https://partner-kit.prospa.com/js/widget/dev/v8/prospa-pay-cart.js" id="prospa-pay"></script>
+
+
+
+
+**Custom**
+
+Include in JS
+
+case 'custom': 
+    itemPrice = document.getElementById(document.getElementById('prospa-pay').getAttribute("priceid")).innerHTML.replace(/[^0-9\.-]+/g,"");
+
+Include in html slug
+priceid="div-idname"
+
+
+
+
+
+**Minify, Uglify**
+https://skalman.github.io/UglifyJS-online/
+https://cssminifier.com/
+https://stackedit.io/app#
+https://davidwalsh.name/mutationobserver-api
+https://blog.sessionstack.com/how-javascript-works-tracking-changes-in-the-dom-using-mutationobserver-86adc7446401
+
