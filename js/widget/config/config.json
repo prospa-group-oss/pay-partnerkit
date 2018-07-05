@@ -2,8 +2,12 @@
   "partner": {
     "id": {
       "64976591": {
-        "minPrice": 1000
+        "minPrice": 1000,
+        "modalContent": '<span id=\"prospa-pay-offer\">or JimmyPay this mofo, with just<span id=\"prospa-pay-instalment\" style=\"font-weight:bolder\">${{offer.instalment}} a week<\/span><a id=\"prospa-pay-modal-link\" href=\"#prospa-pay-modal\" style=\"text-decoration:none; color:#38B973; font-size:52px\"><span id=\"prospa-pay-more-info\">Tell me more, yo<\/span><\/a><\/span>'
       }
     }
+  },
+  "global": {
+    "checkoutregex": "check out"
   }
 }
