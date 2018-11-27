@@ -24,10 +24,6 @@
     }}();
 
   
-    var script = document.createElement("script");
-    script.src = "https://cdn.optimizely.com/js/10931930792.js";
-    document.head.appendChild(script);
- 
 
     function __construct() {
         
