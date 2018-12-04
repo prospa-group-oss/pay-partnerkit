@@ -103,15 +103,13 @@
 
                 prospaPayWeeklyPrice = ((Number(itemPrice) + establishmentFee + serviceFee)/prospaPayTerm).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 
-                prospaPayOffer = '<span id="prospa-pay-offer"><span id="prospa-pay-offer-prefix"><a id="prospa-pay-modal-link" href="#prospa-pay-modal" style="text-decoration:none; color:inherit">or <span id="prospa-pay-instalment" style="font-weight:bolder"> $' + prospaPayWeeklyPrice + ' / week </span><span id="prospa-pay-term">over ' + prospaPayTerm + ' weeks with &nbsp;</span></span><span id="prospa-pay-more-info"><img src="https://partner-kit.prospa.com/assets/prospa-pay-logo-widget.png" width="109px" style="vertical-align: middle"/></a></span></span>';
+                prospaPayOffer = '<span id="prospa-pay-offer"><span id="prospa-pay-offer-prefix"><a id="prospa-pay-modal-link" href="#prospa-pay-modal" style="text-decoration:none; color:#000">or <span id="prospa-pay-instalment" style="font-weight:bolder"> $' + prospaPayWeeklyPrice + ' / week </span><span id="prospa-pay-term">over ' + prospaPayTerm + ' weeks with &nbsp;</span></span><span id="prospa-pay-more-info"><img src="https://partner-kit.prospa.com/assets/prospa-pay-logo-widget.png" width="109px" style="vertical-align: middle"/></a></span></span>';
                 
                 
                
             } else if (isNaN(itemPrice)|| itemPrice == undefined || itemPrice == null || itemPrice == '' ) {                                
-                prospaPayOffer = '<span id="prospa-pay-offer"><span id="prospa-pay-offer-prefix">Pay in ' + prospaPayTerm + ' weekly instalments.</span> <span id="prospa-pay-more-info"><a id="prospa-pay-modal-link" href="#prospa-pay-modal" style="text-decoration:none; color:#38B973">Prospa&nbsp;Pay&nbsp;for&nbsp;business.</a></span></span>';    
-                
-                
-                prospaPayOffer = '<span id="prospa-pay-offer"><span id="prospa-pay-offer-prefix"><a id="prospa-pay-modal-link" href="#prospa-pay-modal" style="text-decoration:none; color:inherit">Pay in ' + prospaPayTerm + ' weekly instalments with &nbsp;</span></span><span id="prospa-pay-more-info"><img src="https://partner-kit.prospa.com/assets/prospa-pay-logo-widget.png" width="109px" style="vertical-align: middle"/></a></span></span>';
+                            
+                prospaPayOffer = '<span id="prospa-pay-offer"><span id="prospa-pay-offer-prefix"><a id="prospa-pay-modal-link" href="#prospa-pay-modal" style="text-decoration:none; color:#000">Pay in ' + prospaPayTerm + ' weekly instalments with &nbsp;</span></span><span id="prospa-pay-more-info"><img src="https://partner-kit.prospa.com/assets/prospa-pay-logo-widget.png" width="109px" style="vertical-align: middle"/></a></span></span>';
                 
                 
                 
